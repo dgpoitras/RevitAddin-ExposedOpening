@@ -1,0 +1,35 @@
+﻿<Window
+    x:Class="ExposedOpeningCalculator.Views.ExposedOpeningCalculatorView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModel="clr-namespace:ExposedOpeningCalculator.ViewModels"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModel:ExposedOpeningCalculatorViewModel}"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    Title="ExposedOpeningCalculator"
+    Height="450"
+    Width="800">
+    <Grid>
+        <StackPanel>
+            <StackPanel>
+                <Label>Occupancy Classification of Building</Label>
+                <RadioButton Name="Residential" IsChecked="True">Residential, business and personal services, and low-hazard industrial.</RadioButton>
+                <RadioButton Name="Commercial">Mercantile and medium-hazard Industrial.</RadioButton>
+            </StackPanel>
+            
+            <StackPanel>
+                <Label>Limiting Distance (m)</Label>
+                <TextBox x:Name="LimitDist" Width="100" MaxLength="6" Text="{Binding LimitDist}"/>
+                <Label>Maximum total area of Exposed Building face.(m sq.)</Label>
+                <TextBox x:Name="MaxArea" Width="100" MaxLength="7" Text="{Binding MaxArea}"/>
+                <Label>Maximum aggregate area of Unprotected Openings(% of exposing building face area in m sq.) Result:</Label>
+                <TextBox x:Name="Result" Width="100" Height="50" Text="{Binding Result}"/>
+            </StackPanel>
+
+            <Button x:Name="Calculate" Command="{Binding CalculateCommand}" Content="Calculate"/>
+        </StackPanel>
+    </Grid>
+</Window>

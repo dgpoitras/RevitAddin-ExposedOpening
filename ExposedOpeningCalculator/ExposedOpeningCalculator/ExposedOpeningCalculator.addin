@@ -1,0 +1,11 @@
+﻿<RevitAddIns>
+    <AddIn Type="Application">
+        <Name>ExposedOpeningCalculator</Name>
+        <Assembly>ExposedOpeningCalculator/ExposedOpeningCalculator.dll</Assembly>
+        <AddInId>3F22A584-A5DC-4BB6-94BB-EBC67C192AA2</AddInId>
+        <FullClassName>ExposedOpeningCalculator.Application</FullClassName>
+        <VendorId>Development</VendorId>
+        <VendorDescription></VendorDescription>
+        <VendorEmail></VendorEmail>
+    </AddIn>
+</RevitAddIns>
