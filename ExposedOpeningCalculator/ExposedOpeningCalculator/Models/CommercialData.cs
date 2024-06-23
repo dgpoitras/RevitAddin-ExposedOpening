@@ -1,11 +1,13 @@
 ﻿
 namespace ExposedOpeningCalculator.Models
 {
-    internal record CommercialData
+    public record CommercialData : IExposedOpeningData
     {
-        public static readonly int[] ZAreaList = { 30, 40, 50, 100, 101 };
+        public int[] ZAreaList { get => new int[] { 30, 40, 50, 100, 101 }; }
 
-        public static readonly Dictionary<int, Func<double[]>> YSelection = new Dictionary<int, Func<double[]>>
+        public Dictionary<int, Func<double[]>> YSelection
+        {
+            get => new Dictionary<int, Func<double[]>>
         {
             {0, () => Y30 },
             {1, () => Y40 },
@@ -13,8 +15,11 @@ namespace ExposedOpeningCalculator.Models
             {3, () => Y100 },
             {4, () => YOver100 }
         };
+        }
 
-        public static readonly double[] XLimitList = {
+        public double[] XLimitList
+        {
+            get => new double[]{
             0.0,
             1.2,
             1.5,
@@ -28,8 +33,11 @@ namespace ExposedOpeningCalculator.Models
             20.0,
             25.0
         };
+        }
 
-        public static readonly double[] Y30 = {
+        public double[] Y30
+        {
+            get => new double[]{
             0,
             4,
             4,
@@ -43,8 +51,11 @@ namespace ExposedOpeningCalculator.Models
             100,
             100
         };
+        }
 
-        public static readonly double[] Y40 = {
+        public double[] Y40
+        {
+            get => new double[]{
             0,
             4,
             4,
@@ -58,8 +69,11 @@ namespace ExposedOpeningCalculator.Models
             100,
             100
         };
+        }
 
-        public static readonly double[] Y50 = {
+        public double[] Y50
+        {
+            get => new double[]{
             0,
             4,
             4,
@@ -73,8 +87,11 @@ namespace ExposedOpeningCalculator.Models
             100,
             100
         };
+        }
 
-        public static readonly double[] Y100 = {
+        public double[] Y100
+        {
+            get => new double[]{
             0,
             4,
             4,
@@ -88,8 +105,11 @@ namespace ExposedOpeningCalculator.Models
             100,
             100
         };
+        }
 
-        public static readonly double[] YOver100 = {
+        public double[] YOver100
+        {
+            get => new double[]{
             0,
             4,
             4,
@@ -103,5 +123,6 @@ namespace ExposedOpeningCalculator.Models
             70,
             100
         };
+        }
     }
 }

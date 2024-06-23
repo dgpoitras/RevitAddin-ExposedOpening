@@ -20,11 +20,12 @@ namespace ExposedOpeningCalculator.ViewModels
             set => SetProperty(ref _maxArea, value);
         }
 
-        private double[] _areaValues = ResidentialData.Y30;
-        public double[] AreaValues { 
-            get => _areaValues;  
-            set => SetProperty(ref _areaValues, value);
-        }
+        // Not Needed? - Derek
+        //private double[] _areaValues = null;
+        //public double[] AreaValues { 
+        //    get => _areaValues;  
+        //    set => SetProperty(ref _areaValues, value);
+        //}
 
         private double _result = 0;
         public double Result { 
@@ -32,7 +33,12 @@ namespace ExposedOpeningCalculator.ViewModels
             set => SetProperty(ref _result, value);
         }
 
-        public bool Residential { get; set; } = true;
+        private bool _residentail = true;
+        public bool Residential
+        {
+            get => _residentail;
+            set => SetProperty(ref _residentail, value);
+        }
 
         public ICommand CalculateCommand { get; }
 
@@ -44,7 +50,17 @@ namespace ExposedOpeningCalculator.ViewModels
         public void CalculateExec()
         {
             Debug.WriteLine("Starting Command");
-            Result = Calculator.CalcPoint(LimitDist, Calculator.GetValues(MaxArea));
+            if (Residential)
+            {
+                IExposedOpeningData data = new ResidentialData();
+                Result = Calculator.CalcPoint(LimitDist, Calculator.GetValues(MaxArea, data), data);
+            }
+            else
+            {
+                IExposedOpeningData data = new CommercialData();
+                Result = Calculator.CalcPoint(LimitDist, Calculator.GetValues(MaxArea, data), data);
+            }
+            
             Debug.WriteLine($"result = {Result}");
 
         }

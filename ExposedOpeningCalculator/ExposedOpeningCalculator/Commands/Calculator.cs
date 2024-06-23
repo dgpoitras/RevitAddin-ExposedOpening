@@ -5,37 +5,37 @@ namespace ExposedOpeningCalculator.Commands
 {
     public class Calculator
     {
-         public static double[] GetValues(double exposedFace)
+        public static double[] GetValues(double exposedFace, IExposedOpeningData data)
         {
-            int face = ResidentialData.ZAreaList[0];
-            foreach (int v in ResidentialData.ZAreaList)
+            int face = data.ZAreaList[0];
+            foreach (int v in data.ZAreaList)
             {
                 if (v <= exposedFace) face = v;
             }
 
-            var faceIndex = Array.IndexOf(ResidentialData.ZAreaList, face);
+            var faceIndex = Array.IndexOf(data.ZAreaList, face);
 
-            if (exposedFace != face) return CalcNewValues(exposedFace, faceIndex);
+            if (exposedFace != face) return CalcNewValues(exposedFace, faceIndex, data);
 
-            return ResidentialData.YSelection[faceIndex]();
+            return data.YSelection[faceIndex]();
         }
 
-        private static double[] CalcNewValues(double faceValue, int zIndex)
+        private static double[] CalcNewValues(double faceValue, int zIndex, IExposedOpeningData data)
         {
-            var minZ = ResidentialData.ZAreaList[zIndex];
-            var maxZ = ResidentialData.ZAreaList[zIndex + 1];
+            var minZ = data.ZAreaList[zIndex];
+            var maxZ = data.ZAreaList[zIndex + 1];
 
             var zMargin = maxZ - minZ;
             var fix = faceValue - minZ;
             var realMargin = fix/zMargin;
 
             var newY = faceValue;
-            var minY = ResidentialData.YSelection[zIndex]();
-            var maxY = ResidentialData.YSelection[zIndex + 1]();
+            var minY = data.YSelection[zIndex]();
+            var maxY = data.YSelection[zIndex + 1]();
 
             List<double> newXList = new List<double>();
 
-            for (int i = 0; i < ResidentialData.XLimitList.Length; i++)
+            for (int i = 0; i < data.XLimitList.Length; i++)
             {
                 var minX = minY[i];
                 var maxX = maxY[i];
@@ -48,11 +48,11 @@ namespace ExposedOpeningCalculator.Commands
             return result;
         }
 
-        public static double CalcPoint(double distLimit, double[] area)
+        public static double CalcPoint(double distLimit, double[] area, IExposedOpeningData data)
         {
-            if (distLimit < ResidentialData.XLimitList[1]) return 0.00;
-            if (distLimit > ResidentialData.XLimitList.Max()) return 100;
-            var x = ResidentialData.XLimitList;
+            if (distLimit < data.XLimitList[1]) return 0.00;
+            if (distLimit > data.XLimitList.Max()) return 100;
+            var x = data.XLimitList;
             var y = area;
             return new LinearInterpolate().Interp(distLimit, x, y);
         }

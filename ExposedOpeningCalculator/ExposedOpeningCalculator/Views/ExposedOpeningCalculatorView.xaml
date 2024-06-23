@@ -14,17 +14,17 @@
     Width="800">
     <Grid>
         <StackPanel>
-            <StackPanel>
+            <StackPanel Margin="30 10 0 0 ">
                 <Label>Occupancy Classification of Building</Label>
-                <RadioButton Name="Residential" IsChecked="True">Residential, business and personal services, and low-hazard industrial.</RadioButton>
-                <RadioButton Name="Commercial">Mercantile and medium-hazard Industrial.</RadioButton>
+                <RadioButton Margin="10 0 0 0" GroupName="ResidentailSelection" Name="Residential" IsChecked="{Binding Residential}">Residential, business and personal services, and low-hazard industrial.</RadioButton>
+                <RadioButton Margin="10 0 0 0" GroupName="ResidentailSelection" Name="Commercial">Mercantile and medium-hazard Industrial.</RadioButton>
             </StackPanel>
-            
-            <StackPanel>
+
+            <StackPanel Margin="10 10 0 0 ">
                 <Label>Limiting Distance (m)</Label>
-                <TextBox x:Name="LimitDist" Width="100" MaxLength="6" Text="{Binding LimitDist}"/>
+                <TextBox x:Name="LimitDist" Width="100" Text="{Binding LimitDist}"/>
                 <Label>Maximum total area of Exposed Building face.(m sq.)</Label>
-                <TextBox x:Name="MaxArea" Width="100" MaxLength="7" Text="{Binding MaxArea}"/>
+                <TextBox x:Name="MaxArea" Width="100" Text="{Binding MaxArea}"/>
                 <Label>Maximum aggregate area of Unprotected Openings(% of exposing building face area in m sq.) Result:</Label>
                 <TextBox x:Name="Result" Width="100" Height="50" Text="{Binding Result}"/>
             </StackPanel>
